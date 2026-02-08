@@ -142,6 +142,7 @@ paru -S --needed --noconfirm vesktop-bin spotify
 print_status "Enabling services..."
 sudo systemctl enable --now bluetooth.service
 sudo systemctl enable --now NetworkManager.service
+sudo systemctl enable lightdm.service
 
 # ========================================
 # DEV ENVIRONMENT
@@ -240,6 +241,11 @@ sed 's/\r$//' "$SCRIPT_DIR/config/xinitrc" > ~/.xinitrc
 
 # Screenshots directory
 mkdir -p ~/Pictures/Screenshots
+
+# Wallpaper
+print_status "Installing wallpaper..."
+mkdir -p ~/wallpaper
+cp "$SCRIPT_DIR"/wallpaper/* ~/wallpaper/ 2>/dev/null || true
 
 # ========================================
 # FINAL SETUP

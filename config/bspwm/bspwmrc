@@ -16,8 +16,8 @@ pgrep -x picom > /dev/null || picom --config $HOME/.config/picom/picom.conf &
 # Notifications
 pgrep -x dunst > /dev/null || dunst &
 
-# Wallpaper (solid color for now - Tokyo Night background)
-xsetroot -solid "#1a1b26"
+# Wallpaper
+feh --bg-fill ~/wallpaper/tokyonight.png
 
 # Polkit agent (needed for GUI password prompts)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
