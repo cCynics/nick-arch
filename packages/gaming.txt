@@ -1,0 +1,22 @@
+# Steam
+steam
+
+# Wine / Compatibility
+wine
+wine-mono
+wine-gecko
+winetricks
+
+# Performance
+gamemode
+lib32-gamemode
+mangohud
+lib32-mangohud
+
+# Game manager
+lutris
+
+# 32-bit graphics libraries (needed for most games)
+lib32-mesa
+lib32-vulkan-radeon
+lib32-vulkan-intel

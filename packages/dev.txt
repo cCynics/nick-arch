@@ -1,0 +1,30 @@
+# C/C++
+gcc
+clang
+cmake
+make
+gdb
+valgrind
+
+# Python
+python
+python-pip
+python-virtualenv
+
+# JavaScript / Node
+nodejs
+npm
+yarn
+
+# Databases
+postgresql
+redis
+
+# Containers
+docker
+docker-compose
+
+# Editors / Tools
+code
+github-cli
+lazygit
