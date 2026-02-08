@@ -70,14 +70,11 @@ Or use startx with your .xinitrc.
 
 1. Configure bspwm: `~/.config/bspwm/bspwmrc`
 2. Configure keybinds: `~/.config/sxhkd/sxhkdrc`
-3. Setup zsh + starship prompt
+3. Setup zsh
 4. Configure neovim
 5. Setup polybar
-6. Apply Gruvbox theme
 
 ## Notes
 
 - Script assumes a fresh archinstall base
-- Test in a VM before bare metal
-- Can swap to oxwm later once it matures
-- All dotfile configs will go in the `config/` directory
+

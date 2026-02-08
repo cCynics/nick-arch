@@ -7,7 +7,7 @@ unzip
 zip
 htop
 btop
-neofetch
+fastfetch
 zsh
 zsh-completions
 alacritty
