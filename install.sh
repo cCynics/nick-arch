@@ -209,6 +209,39 @@ To check if gamemode is active:
 EOF
 
 # ========================================
+# DOTFILES / CONFIGS
+# ========================================
+
+print_status "Installing config files..."
+
+# Create config directories
+mkdir -p ~/.config/bspwm
+mkdir -p ~/.config/sxhkd
+mkdir -p ~/.config/polybar
+mkdir -p ~/.config/picom
+mkdir -p ~/.config/dunst
+mkdir -p ~/.config/alacritty
+mkdir -p ~/.config/rofi
+
+# Copy configs (strip CRLF just in case)
+for f in "$SCRIPT_DIR"/config/bspwm/* "$SCRIPT_DIR"/config/sxhkd/* "$SCRIPT_DIR"/config/polybar/* "$SCRIPT_DIR"/config/picom/* "$SCRIPT_DIR"/config/dunst/* "$SCRIPT_DIR"/config/alacritty/* "$SCRIPT_DIR"/config/rofi/*; do
+    [ -f "$f" ] || continue
+    dest="$HOME/.config/$(echo "$f" | sed "s|.*config/||")"
+    mkdir -p "$(dirname "$dest")"
+    sed 's/\r$//' "$f" > "$dest"
+done
+
+# Make bspwmrc and polybar launch script executable
+chmod +x ~/.config/bspwm/bspwmrc
+chmod +x ~/.config/polybar/launch.sh
+
+# Setup xinitrc
+sed 's/\r$//' "$SCRIPT_DIR/config/xinitrc" > ~/.xinitrc
+
+# Screenshots directory
+mkdir -p ~/Pictures/Screenshots
+
+# ========================================
 # FINAL SETUP
 # ========================================
 
@@ -221,11 +254,15 @@ xdg-user-dirs-update
 print_status "========================================="
 print_status "Base installation complete!"
 print_status "========================================="
-print_warning "You should reboot now. After reboot, run dotfiles setup."
 echo ""
-echo "Next steps:"
-echo "  1. Reboot your system"
-echo "  2. Log back in"
-echo "  3. Setup your dotfiles and WM config"
-echo "  4. Start X with 'startx' or enable lightdm:"
-echo "     sudo systemctl enable lightdm.service"
+echo "Everything is installed and configured."
+echo "Reboot, log in, and run 'startx' to launch bspwm."
+echo ""
+echo "Keybinds:"
+echo "  super + Return     Open terminal"
+echo "  super + d          App launcher (rofi)"
+echo "  super + q          Close window"
+echo "  super + b          Browser"
+echo "  super + e          File manager"
+echo "  super + 1-9        Switch desktop"
+echo "  super + shift + r  Restart bspwm"

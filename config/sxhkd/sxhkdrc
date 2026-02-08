@@ -1,0 +1,123 @@
+# ========================================
+# Application Launchers
+# ========================================
+
+# Terminal
+super + Return
+	alacritty
+
+# App launcher
+super + d
+	rofi -show drun
+
+# Window switcher
+alt + Tab
+	rofi -show window
+
+# File manager
+super + e
+	thunar
+
+# Browser
+super + b
+	firefox
+
+# Screenshot (selection)
+Print
+	flameshot gui
+
+# Screenshot (fullscreen)
+super + Print
+	flameshot full -p ~/Pictures/Screenshots
+
+# ========================================
+# BSPWM Controls
+# ========================================
+
+# Quit bspwm
+super + shift + q
+	bspc quit
+
+# Restart bspwm
+super + shift + r
+	bspc wm -r
+
+# Close window
+super + q
+	bspc node -c
+
+# Kill window
+super + shift + x
+	bspc node -k
+
+# ========================================
+# Window States
+# ========================================
+
+# Toggle floating
+super + space
+	bspc node -t '~floating'
+
+# Toggle fullscreen
+super + f
+	bspc node -t '~fullscreen'
+
+# Tiled
+super + t
+	bspc node -t tiled
+
+# ========================================
+# Focus / Move Windows
+# ========================================
+
+# Focus window in direction (vim keys)
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+# Move window in direction
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# Focus window in direction (arrow keys)
+super + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
+
+# Move window in direction (arrow keys)
+super + shift + {Left,Down,Up,Right}
+	bspc node -s {west,south,north,east}
+
+# ========================================
+# Desktops
+# ========================================
+
+# Switch to desktop
+super + {1-9}
+	bspc desktop -f '^{1-9}'
+
+# Send window to desktop
+super + shift + {1-9}
+	bspc node -d '^{1-9}' --follow
+
+# ========================================
+# Resize Windows
+# ========================================
+
+# Expand window
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Shrink window
+super + ctrl + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# ========================================
+# Misc
+# ========================================
+
+# Lock screen
+super + shift + l
+	betterlockscreen -l
+
+# Reload sxhkd config
+super + Escape
+	pkill -USR1 -x sxhkd
