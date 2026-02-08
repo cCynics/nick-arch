@@ -17,6 +17,5 @@ lib32-mangohud
 lutris
 
 # 32-bit graphics libraries (needed for most games)
+# NOTE: GPU-specific drivers are installed by install.sh based on detection
 lib32-mesa
-lib32-vulkan-radeon
-lib32-vulkan-intel

@@ -4,8 +4,11 @@ set -e
 
 # Setup Python
 echo "Setting up Python environment..."
-pip install --user --upgrade pip
-pip install --user pipenv poetry black pylint mypy
+sudo pacman -S --needed --noconfirm python-pipx
+pipx install poetry
+pipx install black
+pipx install pylint
+pipx install mypy
 
 # Setup PostgreSQL
 echo "Setting up PostgreSQL..."

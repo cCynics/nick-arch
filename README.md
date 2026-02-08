@@ -31,7 +31,7 @@ Automated post-install script for my personal Arch Linux setup.
 nmtui
 
 # Clone this repo
-git clone https://github.com/yourusername/nick-arch.git
+git clone https://github.com/cCynics/nick-arch.git
 cd nick-arch
 
 # Make scripts executable

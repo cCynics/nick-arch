@@ -55,6 +55,41 @@ sudo pacman -Sy --noconfirm
 print_status "Installing gaming packages..."
 sudo pacman -S --needed --noconfirm $(cat "$SCRIPT_DIR/packages/gaming.txt" | grep -v '^#' | grep -v '^$')
 
+# Detect GPU and install appropriate drivers
+print_status "Detecting GPU..."
+if systemd-detect-virt --quiet 2>/dev/null; then
+    VM_TYPE=$(systemd-detect-virt)
+    print_warning "Running in a VM ($VM_TYPE) - installing VM guest drivers"
+    case "$VM_TYPE" in
+        oracle)
+            sudo pacman -S --needed --noconfirm virtualbox-guest-utils
+            sudo systemctl enable vboxservice.service
+            ;;
+        kvm|qemu)
+            sudo pacman -S --needed --noconfirm qemu-guest-agent spice-vdagent
+            ;;
+        vmware)
+            sudo pacman -S --needed --noconfirm open-vm-tools
+            sudo systemctl enable vmtoolsd.service
+            ;;
+    esac
+else
+    print_status "Bare metal detected - installing GPU drivers"
+    GPU_INFO=$(lspci | grep -i 'vga\|3d')
+    if echo "$GPU_INFO" | grep -qi 'nvidia'; then
+        print_status "NVIDIA GPU detected"
+        sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils nvidia-settings
+    elif echo "$GPU_INFO" | grep -qi 'amd\|radeon'; then
+        print_status "AMD GPU detected"
+        sudo pacman -S --needed --noconfirm vulkan-radeon lib32-vulkan-radeon
+    elif echo "$GPU_INFO" | grep -qi 'intel'; then
+        print_status "Intel GPU detected"
+        sudo pacman -S --needed --noconfirm vulkan-intel lib32-vulkan-intel
+    else
+        print_warning "Could not detect GPU - install drivers manually"
+    fi
+fi
+
 # Setup AUR helper
 print_status "Setting up AUR helper (paru)..."
 bash "$SCRIPT_DIR/scripts/aur-setup.sh"
@@ -74,7 +109,7 @@ bash "$SCRIPT_DIR/scripts/dev-setup.sh"
 
 # Change default shell to zsh
 print_status "Setting zsh as default shell..."
-chsh -s "$(which zsh)"
+sudo chsh -s "$(which zsh)" "$USER"
 
 # Setup gaming environment
 print_status "Setting up gaming optimizations..."
