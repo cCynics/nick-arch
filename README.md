@@ -4,11 +4,11 @@ Automated post-install script for my personal Arch Linux setup.
 
 ## Features
 
-- **WM**: bspwm (X11) - RS3 compatible
+- **WM**: bspwm (X11)
 - **Terminal**: Alacritty + Zsh + Starship
 - **Dev Stack**: Python, C/C++, Node.js, Rust, PostgreSQL, Docker
 - **Gaming**: Steam, Lutris, Wine, gamemode, mangohud
-- **Theme**: Gruvbox ready (configs to come)
+- **Theme**: No dotfiles yet
 
 ## Installation
 
